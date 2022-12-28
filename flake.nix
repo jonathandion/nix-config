@@ -31,6 +31,6 @@
       };
     in
     {
-      defaultPackage.aarch64-darwin = darwinSystem.system;
+      darwinConfigurations."Jonathans-MacBook-Pro" = darwinSystem;
     };
 }
