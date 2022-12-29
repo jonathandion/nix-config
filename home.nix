@@ -1,8 +1,6 @@
 { config, lib, pkgs, ... }:
 
 {
-  programs.home-manager.enable = true;
-
   imports = (import ./programs);
 
   nixpkgs.overlays = [ ];
@@ -15,6 +13,10 @@
       VISUAL = "$EDITOR";
       RIPGREP_CONFIG_PATH = "${config.home.homeDirectory}/.ripgreprc";
     };
+
+    sessionPath = [
+      "${config.home.homeDirectory}/bin"
+    ];
 
     packages = with pkgs; [
       asciinema
@@ -42,6 +44,10 @@
   };
 
   programs = {
+
+    home-manager = {
+      enable = true;
+    };
 
     bat = {
       enable = true;
@@ -128,8 +134,6 @@
       initExtra = ''
         bindkey ^E edit-command-line
 
-        export PATH=$PATH:${config.home.homeDirectory}/code/.f/bin
-
         # Fig post block. Keep at the bottom of this file.
         [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
       '';
@@ -142,7 +146,7 @@
           "vi-mode"
         ];
         theme = "zen";
-        custom = "${config.home.homeDirectory}/.config/zsh";
+        custom = "${config.xdg.configHome}/zsh";
       };
     };
   };
@@ -152,6 +156,11 @@
     --hidden
     --follow
   '';
+
+  home.file."bin" = {
+    source = ./bin;
+    recursive = true;
+  };
 
   xdg.configFile."nvim" = {
     source = programs/neovim;

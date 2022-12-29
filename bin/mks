@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+#
+# Create a bash script using a template.
+
+if [[ -z $1 ]]; then
+  echo -e "usage:\\nmks <name>"
+fi
+
+[[ $1 ]] || exit 1
+
+printf '%s' "\
+#!/usr/bin/env bash
+#
+# $1 - $2
+main() {
+}
+main \"\$@\"
+" > "$1" && chmod +x "$1"
+
+$EDITOR $1

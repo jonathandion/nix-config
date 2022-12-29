@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+main() {
+  (nohup "$@" &>/dev/null &)
+}
+main "$@"

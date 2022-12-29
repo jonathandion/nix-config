@@ -17,4 +17,4 @@ git_prompt_info() {
   [[ -d .git ]] && echo "<git:$(git rev-parse --abbrev-ref HEAD)> "
 }
 
-PROMPT='[%F{blue}%2~%B%b%f%b]$(getJobs)${NEWLINE}[$] $(git_prompt_info)'
+PROMPT='[%F{blue}%2~%B%b%f%b]$(getJobs)${NEWLINE}[λ] $(git_prompt_info)'

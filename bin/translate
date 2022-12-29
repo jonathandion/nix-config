@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+if [[ -z $1 || -z $2 ]]; then
+  echo -e "usage: translate <text> <lang>"
+  echo -e "example: translate hello fr"
+  exit 1
+fi
+
+main(){
+  wget -U "Mozilla/5.0" -qO - "http://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=$2&dt=t&q=$(echo $1 | sed "s/[\"'<>]//g")" \
+    | sed "s/,,,0]],,.*//g" \
+    | awk -F'"' '{print $2}';
+}
+
+main "$@"

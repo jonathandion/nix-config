@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+main() {
+    if [[ -x $(command -v jq) ]]; then
+         jq -R 'split(".") | .[0],.[1] | @base64d | fromjson' <<< "${1}"
+    fi
+}
+
+main "$@"

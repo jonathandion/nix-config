@@ -1,0 +1,78 @@
+#!/bin/bash
+
+is_in_git_repo() {
+  git rev-parse HEAD > /dev/null 2>&1
+}
+
+fkill() {
+  local pid
+  pid=$(ps -ef | sed 1d | fzf -m -e | awk '{print $2}')
+
+  if [ "x$pid" != "x" ]
+  then
+    echo $pid | xargs kill -${1:-9}
+  fi
+}
+
+git_add(){
+ is_in_git_repo || return
+ items=$(git status -s | cut -c4- | fzf -m --preview 'git show --color=always {} | head -'$LINES)
+ if [[ $items ]]; then
+   git add $items
+   git status
+ fi
+}
+
+git_branch_delete() {
+  is_in_git_repo || return
+  git branch -a --color=always | grep -v '/HEAD\s' | sort |
+    fzf --ansi --multi --tac --preview-window right:70% \
+    --preview 'git log --oneline --color=always --graph --date=short --pretty="format:%C(auto)%cd %h%d %s" $(sed s/^..// <<< {} | cut -d" " -f1) | head -'$LINES |
+    sed 's/^..//' | cut -d' ' -f1 |
+    sed 's#^remotes/##' | xargs -P 2 git branch -D
+}
+
+git_checkout_branch() {
+  is_in_git_repo || return
+  git branch -a --color=always | grep -v '/HEAD\s' | sort |
+    fzf --ansi --multi --tac --preview-window right:70% \
+    --preview 'git log --oneline --graph --color=always --date=short --pretty="format:%C(auto)%cd %h%d %s" $(sed s/^..// <<< {} | cut -d" " -f1) | head -'$LINES | sed 's/^..//' | cut -d' ' -f1 | sed 's#^remotes/##' | xargs -P 2 git checkout
+}
+
+frm() {
+  fzf --multi --preview '(git diff --color=always -- {-1} | sed 1,4d; cat {-1}) | head -500' | xargs -I % rm -r %
+}
+
+if (( $# > 0 )); then
+  while [[ $# -gt 0 ]]
+  do
+    key="$1"
+    case $key in
+      gbd)
+        git_branch_delete
+        shift
+        ;;
+      gcb)
+        git_checkout_branch
+        shift
+        ;;
+      ga)
+        git_add
+        shift
+        ;;
+      kill|k)
+        fkill
+        shift
+        ;;
+      rm|r)
+        frm
+        shift
+        ;;
+      *)
+        shift
+        ;;
+    esac
+  done
+else
+  fzf
+fi
