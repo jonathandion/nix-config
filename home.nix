@@ -87,6 +87,11 @@
       enable = true;
       userName = "jonathandion";
       userEmail = "jonathandionalary@gmail.com";
+      extraConfig = {
+        pull = {
+          rebase = true;
+        };
+      };
       ignores = [
         "*~"
         ".DS_Store"
