@@ -117,6 +117,11 @@ require("glance").setup()
 
 -- Telescope (fuzzy finder)
 require("telescope").setup({
+  defaults = {
+    file_ignore_patterns = {
+      ".git"
+    },
+  },
   extensions = {
     file_browser = {
       theme = "ivy",
