@@ -44,14 +44,7 @@
   };
 
   programs = {
-
-    home-manager = {
-      enable = true;
-    };
-
-    bat = {
-      enable = true;
-    };
+    home-manager = { enable = true; };
 
     bash = {
       enable = true;
@@ -80,6 +73,34 @@
         vi = "nvim";
         vim = "nvim";
         weather = "curl wttr.in/Montreal";
+      };
+    };
+
+    zsh = {
+      enable = true;
+      enableCompletion = true;
+      enableAutosuggestions = true;
+      enableSyntaxHighlighting = true;
+      initExtraFirst = ''
+        # Fig pre block. Keep at the top of this file.
+        [[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
+      '';
+      initExtra = ''
+        bindkey ^E edit-command-line
+
+        # Fig post block. Keep at the bottom of this file.
+        [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
+      '';
+      shellAliases = config.programs.bash.shellAliases;
+      oh-my-zsh = {
+        enable = true;
+        plugins = [
+          "git"
+          "z"
+          "vi-mode"
+        ];
+        theme = "zen";
+        custom = "${config.xdg.configHome}/zsh";
       };
     };
 
@@ -119,41 +140,11 @@
       };
     };
 
-    htop = {
-      enable = true;
-    };
+    bat = { enable = true; };
 
-    jq = {
-      enable = true;
-    };
+    htop = { enable = true; };
 
-    zsh = {
-      enable = true;
-      enableCompletion = true;
-      enableAutosuggestions = true;
-      enableSyntaxHighlighting = true;
-      initExtraFirst = ''
-        # Fig pre block. Keep at the top of this file.
-        [[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
-      '';
-      initExtra = ''
-        bindkey ^E edit-command-line
-
-        # Fig post block. Keep at the bottom of this file.
-        [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
-      '';
-      shellAliases = config.programs.bash.shellAliases;
-      oh-my-zsh = {
-        enable = true;
-        plugins = [
-          "git"
-          "z"
-          "vi-mode"
-        ];
-        theme = "zen";
-        custom = "${config.xdg.configHome}/zsh";
-      };
-    };
+    jq = { enable = true; };
   };
 
   home.file.".ripgreprc".text = ''

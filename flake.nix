@@ -31,6 +31,6 @@
       };
     in
     {
-      darwinConfigurations."Jonathans-MacBook-Pro" = darwinSystem;
+      darwinConfigurations.myMacbook = darwinSystem;
     };
 }
