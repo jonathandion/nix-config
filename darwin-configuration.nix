@@ -6,12 +6,12 @@
       home-manager
     ];
 
-  /* fonts = { */
-  /*   fontDir.enable = true; */
-  /*   fonts = with pkgs; [ */
-  /*     hack */
-  /*   ]; */
-  /* }; */
+  fonts = {
+    fontDir.enable = true;
+    fonts = with pkgs; [
+      hack-font
+    ];
+  };
 
   system.stateVersion = 4;
 
