@@ -129,7 +129,7 @@
     fzf = {
       enable = true;
       enableZshIntegration = true;
-      defaultCommand = "rg --files --hidden --follow --glob '!.git/*'";
+      defaultCommand = "fd --hidden -E .git --no-ignore-vcs --follow --type f";
     };
 
     gh = {
