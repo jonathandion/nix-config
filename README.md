@@ -1,5 +1,15 @@
 # ❄️ nix-config
 
+## macOS Settings
+
+To find a specific macOS option use:
+
+```sh
+defaults find <option>
+```
+
+then check if the option is available in nix-darwin [here](https://github.com/LnL7/nix-darwin/tree/master/modules/system/defaults).
+
 ## 📖 Manuals
 
 * [nix-darwin](https://daiderd.com/nix-darwin/manual/index.html)

@@ -57,7 +57,7 @@
       enable = true;
       enableCompletion = false;
       shellAliases = {
-        ".f" = "cd $HOME/code/.f";
+        ".f" = "cd $HOME/code/nix-config";
         bulkrename = "qmv -f do";
         dc = "cd $HOME/documents";
         dl = "cd $HOME/downloads";
@@ -162,13 +162,18 @@
     recursive = true;
   };
 
+  xdg.configFile."zsh" = {
+    source = programs/zsh;
+    recursive = true;
+  };
+
   xdg.configFile."nvim" = {
     source = programs/neovim;
     recursive = true;
   };
 
-  xdg.configFile."zsh" = {
-    source = programs/zsh;
+  xdg.configFile."hammerspoon" = {
+    source = programs/hammerspoon;
     recursive = true;
   };
 
