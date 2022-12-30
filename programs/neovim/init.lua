@@ -119,7 +119,7 @@ require("glance").setup()
 require("telescope").setup({
   defaults = {
     file_ignore_patterns = {
-      ".git"
+      ".git",
     },
   },
   extensions = {
@@ -210,7 +210,7 @@ lsp.ensure_installed({
 
   -- devops/infrastructure
   "bashls",
-  "sumneko_lua"
+  "sumneko_lua",
 })
 
 local cmp = require("cmp")
@@ -319,13 +319,6 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   command = ":EslintFixAll",
 })
 
--- automatically source and re-compile packer whenever you save this init.lua
-vim.api.nvim_create_autocmd("BufWritePost", {
-  command = "source <afile> | PackerCompile",
-  group = vim.api.nvim_create_augroup("Packer", { clear = true }),
-  pattern = vim.fn.expand("$MYVIMRC"),
-})
-
 cmd_alias("node", "! node %")
 cmd_alias("tsnode", "! ts-node %")
 
@@ -347,15 +340,34 @@ user_cmd("OldFiles", telescope.oldfiles, {})
 
 -- @keymaps
 local keyset = vim.keymap.set
+
+-- remove highlight
 keyset("n", "<Esc><Esc>", ":noh<cr>")
+
+-- navigate fast between paragraphs
 keyset("n", "<down>", "}")
 keyset("n", "<up>", "{")
+
+-- quit
 keyset("n", "<leader>q", ":bd<cr>")
+
+-- save
 keyset("n", "<leader>w", ":w<cr>")
+
+-- copy current buffer absolute path into clipboard
 keyset("n", "<leader>y", ":CopyCurrentPath<cr>")
+
+-- fast search
 keyset("n", "<C-space>", "/")
+
+-- file explorer
 keyset("n", "<leader>-", ":Explore<cr>")
-keyset("n", "<leader>e", ":e $MYVIMRC<cr>")
+
+-- replace word under cursor
+keyset("n", "<C-r>", ":%s#<c-r><c-w>##g<left><left>")
+keyset("v", "<C-r>", ":s#<c-r><c-w>##g<left><left>")
+
+-- diagnostic
 keyset("n", "<leader>d", vim.diagnostic.open_float)
 keyset("n", "[d", vim.diagnostic.goto_prev)
 keyset("n", "]d", vim.diagnostic.goto_next)
@@ -388,12 +400,12 @@ keyset("n", ";", "<Plug>(easymotion-overwin-f)")
 -- telescope
 keyset("n", "<C-f>", telescope.find_files, { desc = "[F]ind [F]iles" })
 keyset("n", "<C-p>", telescope.commands, { desc = "[F]ind [C]ommands" })
+keyset("n", "<leader>fb", telescope.buffers, { desc = "[F]ind [B]uffers" })
+keyset("n", "<leader>fd", telescope.diagnostics, { desc = "[F]ind [D]iagnostics" })
 keyset("n", "<leader>ff", telescope.git_status, { desc = "[F]ind [F]iles Git Status" })
 keyset("n", "<leader>fg", telescope.live_grep, { desc = "[F]ind [G]rep" })
 keyset("n", "<leader>fh", telescope.oldfiles, { desc = "[F]ind [H]istory" })
-keyset("n", "<leader>fb", telescope.buffers, { desc = "[F]ind [B]uffers" })
 keyset("n", "<leader>fw", telescope.grep_string, { desc = "[F]ind [W]ord" })
-keyset("n", "<leader>fd", telescope.diagnostics, { desc = "[F]ind [D]iagnostics" })
 
 -- harpoon
 keyset("n", "<leader>m", require("harpoon.mark").add_file)

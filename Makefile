@@ -1,6 +1,10 @@
-default: build
+default: help
 
 HOST=$(shell hostname | sed s/.local//g)
+
+help: 
+	@echo "Rollbacking config..."
+	./result/sw/bin/darwin-rebuild --help
 
 build: 
 	@echo "Building config..."
