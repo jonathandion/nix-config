@@ -14,6 +14,10 @@ install:
 	@echo "Installing config..."
 	./result/sw/bin/darwin-rebuild switch --flake .#myMacbook
 
+pull-nvim:
+	@echo "Pulling nvim config..."
+	nix flake lock --update-input nvim
+
 clean:
 	@echo "Cleaning..."
 	rm -rf result

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, nvim, ... }:
 
 {
   imports = (import ./programs);
@@ -164,7 +164,7 @@
   };
 
   xdg.configFile."nvim" = {
-    source = programs/neovim;
+    source = nvim.outPath + "/src/";
     recursive = true;
   };
 

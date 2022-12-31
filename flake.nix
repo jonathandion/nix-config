@@ -11,8 +11,11 @@
       url = "github:lnl7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nvim = {
+      url = "github:jonathandion/web-dev.nvim";
+    };
   };
-  outputs = { darwin, home-manager, nur, nixpkgs, ... }:
+  outputs = { darwin, home-manager, nur, nixpkgs, nvim, ... }:
     let
       homeManagerConfFor = config: { ... }: {
         nixpkgs.overlays = [ nur.overlay ];
@@ -25,6 +28,7 @@
           home-manager.darwinModules.home-manager
           {
             home-manager.users.jondion = homeManagerConfFor ./home.nix;
+            home-manager.extraSpecialArgs = { inherit nvim; };
           }
         ];
         specialArgs = { inherit nixpkgs; };
