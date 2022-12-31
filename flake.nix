@@ -13,6 +13,7 @@
     };
     nvim = {
       url = "github:jonathandion/web-dev.nvim";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
   outputs = { darwin, home-manager, nur, nixpkgs, nvim, ... }:

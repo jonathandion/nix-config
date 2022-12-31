@@ -164,7 +164,7 @@
   };
 
   xdg.configFile."nvim" = {
-    source = nvim.outPath + "/src/";
+    source = nvim.defaultPackage.aarch64-darwin;
     recursive = true;
   };
 
