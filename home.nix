@@ -48,32 +48,7 @@
 
     bash = {
       enable = true;
-      enableCompletion = false;
-      shellAliases = {
-        ".f" = "cd $HOME/code/nix-config";
-        bulkrename = "qmv -f do";
-        dc = "cd $HOME/documents";
-        dl = "cd $HOME/downloads";
-        dt = "cd $HOME/desktop";
-        fm = "ranger";
-        ipinfo = "curl ipinfo.io";
-        j = "z";
-        l = "ls -lFh";
-        lS = "ls -1FSsh";
-        la = "ls -lAFh";
-        ldot = "ls -ld .*";
-        ll = "ls -l";
-        lr = "ls -tRFh";
-        lrt = "ls -1Fcrt";
-        lt = "ls -ltFh";
-        map = "xargs -n1";
-        oldvim = "vim";
-        rld = "exec $SHELL -l";
-        v = "vim";
-        vi = "nvim";
-        vim = "nvim";
-        weather = "curl wttr.in/Montreal";
-      };
+      enableCompletion = true;
     };
 
     zsh = {
@@ -91,7 +66,30 @@
         # Fig post block. Keep at the bottom of this file.
         [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
       '';
-      shellAliases = config.programs.bash.shellAliases;
+      shellAliases = {
+        ".f" = "cd $HOME/code/nix-config";
+        bulkrename = "qmv -f do";
+        cat = "bat";
+        dc = "cd $HOME/documents";
+        dl = "cd $HOME/downloads";
+        dt = "cd $HOME/desktop";
+        fm = "ranger";
+        ipinfo = "curl ipinfo.io";
+        j = "z";
+        l = "ls -lFh";
+        lS = "ls -1FSsh";
+        la = "ls -lAFh";
+        ldot = "ls -ld .*";
+        ll = "ls -l";
+        lr = "ls -tRFh";
+        lrt = "ls -1Fcrt";
+        lt = "ls -ltFh";
+        map = "xargs -n1";
+        rld = "exec $SHELL -l";
+        v = "nvim";
+        vim = "nvim";
+        weather = "curl wttr.in/Montreal";
+      };
       oh-my-zsh = {
         enable = true;
         plugins = [
@@ -140,7 +138,12 @@
       };
     };
 
-    bat = { enable = true; };
+    bat = { 
+      enable = true; 
+      config = {
+        theme = "gruvbox-dark";
+      };
+    };
 
     htop = { enable = true; };
 
