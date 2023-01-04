@@ -1,5 +1,5 @@
 {
-  description = "Nix and home-manager configurations for Jon Dion laptop";
+  description = "Nix, home-manager configurations for Jon Dion computer";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nur.url = github:nix-community/nur;
@@ -18,18 +18,21 @@
   };
   outputs = { darwin, home-manager, nur, nixpkgs, nvim, ... }:
     let
+      system = "aarch64-darwin";
       homeManagerConfFor = config: { ... }: {
         nixpkgs.overlays = [ nur.overlay ];
         imports = [ config ];
       };
       darwinSystem = darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
+        system = system;
         modules = [
           ./darwin-configuration.nix
           home-manager.darwinModules.home-manager
           {
             home-manager.users.jondion = homeManagerConfFor ./home.nix;
-            home-manager.extraSpecialArgs = { inherit nvim; };
+            home-manager.extraSpecialArgs = { 
+              nvim = nvim.defaultPackage.${system}; 
+            };
           }
         ];
         specialArgs = { inherit nixpkgs; };

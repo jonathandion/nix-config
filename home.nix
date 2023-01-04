@@ -1,4 +1,4 @@
-{ config, lib, pkgs, nvim, ... }:
+{ config, lib, pkgs, nvim, system, ... }:
 
 {
   imports = (import ./programs);
@@ -38,8 +38,9 @@
       ripgrep
       shellcheck
       tldr
-      tree
       wget
+      tree
+      pstree
     ];
   };
 
@@ -89,6 +90,7 @@
         v = "nvim";
         vim = "nvim";
         weather = "curl wttr.in/Montreal";
+        nd= "nix develop -c $SHELL";
       };
       oh-my-zsh = {
         enable = true;
@@ -167,7 +169,7 @@
   };
 
   xdg.configFile."nvim" = {
-    source = nvim.defaultPackage.aarch64-darwin;
+    source = nvim;
     recursive = true;
   };
 

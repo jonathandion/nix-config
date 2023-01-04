@@ -39,6 +39,7 @@
       "insomnia"
       "raycast"
       "stats"
+      "zwift"
     ];
   };
 
