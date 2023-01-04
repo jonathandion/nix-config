@@ -1,8 +1,9 @@
-#!/usr/bin/env bash
+#!/usr/bin/env nix-shell
+#!nix-shell -i bash -p wget
 
 if [[ -z $1 || -z $2 ]]; then
-  echo -e "usage: translate <text> <lang>"
-  echo -e "example: translate hello fr"
+  echo -e "usage:\\ntranslate <text> <lang>"
+  echo -e "example:\\ntranslate hello fr"
   exit 1
 fi
 

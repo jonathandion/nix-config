@@ -1,9 +1,27 @@
-#!/usr/bin/env bash
+#!/usr/bin/env nix-shell
+#!nix-shell -i bash -p jq
+
+set -eo pipefail
+
+decode() {
+  jq -R 'split(".") | .[0],.[1] | @base64d | fromjson' <<< "$1"
+}
 
 main() {
-    if [[ -x $(command -v jq) ]]; then
-         jq -R 'split(".") | .[0],.[1] | @base64d | fromjson' <<< "${1}"
+  if [ -t 0 ]; then
+    if [ -z "$1" ]; then
+      echo -e "Decode JWT token from stdin"
+      echo -e "usage:\\njwtd <token>"
+      exit 1
     fi
+    token=$1;
+  else
+    while read -r line ; do
+      token=$line
+    done
+  fi
+
+  decode $token
 }
 
 main "$@"

@@ -1,7 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env nix-shell
+#!nix-shell -i bash -p wget
+
 if [ -t 0 ]; then
   if [ -z "$1" ]; then
-    echo "usage: tny long_url [custom_keyword]"
+    echo "usage:\\ntinyurl long_url [custom_keyword]"
     echo ""
     echo "Shorten URLs with tny.im URL shortener"
     echo "This script expects a long URL to shorten either as an argument or passed through STDIN."
@@ -17,5 +19,4 @@ fi
 
 tiny=`wget -q -O - http://tny.im/yourls-api.php?action=shorturl\&format=simple\&url=$url\&keyword=$2`
 
-echo $tiny
-echo $tiny | tr -d '\n' | xclip -sel clipboard -i
+echo "$tiny"
