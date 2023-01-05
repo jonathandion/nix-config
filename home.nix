@@ -29,14 +29,11 @@
       gh
       htop
       jq
-      lua
+      fx
       neovim
-      nodejs
-      python3
       ranger
       renameutils
       ripgrep
-      shellcheck
       tldr
       wget
       tree
