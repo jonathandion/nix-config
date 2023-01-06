@@ -10,8 +10,8 @@ build:
 	@echo "Building config..."
 	nix build .#darwinConfigurations.myMacbook.system --extra-experimental-features "nix-command flakes"
 
-install: 
-	@echo "Installing config..."
+switch: 
+	@echo "Switching config..."
 	./result/sw/bin/darwin-rebuild switch --flake .#myMacbook
 
 update:
