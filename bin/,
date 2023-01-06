@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+if [[ -z $1 ]]; then
+  echo -e "usage:, <package>"
+  echo -e "e.g:, nodejs cowsay"
+  exit 1
+fi
+
+args="$@"
+
+for i in $args; do
+  v="${v} nixpkgs#$i"
+done
+
+echo -e "Loading packages:\\n$args"
+nix shell $v
