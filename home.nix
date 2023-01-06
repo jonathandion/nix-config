@@ -21,28 +21,31 @@
     packages = with pkgs; [
       asciinema
       awscli2
-      bat
       coreutils
-      direnv
+      renameutils
       fd
-      fzf
-      gh
-      htop
-      jq
       fx
       neovim
       ranger
-      renameutils
       ripgrep
       tldr
-      wget
       tree
+      wget
       pstree
     ];
   };
 
   programs = {
+
     home-manager = { enable = true; };
+
+    htop = { enable = true; };
+
+    jq = { enable = true; };
+
+    broot = {
+      enable = true;
+    };
 
     bash = {
       enable = true;
@@ -71,7 +74,7 @@
         dc = "cd $HOME/documents";
         dl = "cd $HOME/downloads";
         dt = "cd $HOME/desktop";
-        fm = "ranger";
+        fm = "broot";
         ipinfo = "curl ipinfo.io";
         j = "z";
         l = "ls -lFh";
@@ -87,7 +90,7 @@
         v = "nvim";
         vim = "nvim";
         weather = "curl wttr.in/Montreal";
-        nd= "nix develop -c $SHELL";
+        nd = "nix develop -c $SHELL";
       };
       oh-my-zsh = {
         enable = true;
@@ -137,16 +140,13 @@
       };
     };
 
-    bat = { 
-      enable = true; 
+    bat = {
+      enable = true;
       config = {
         theme = "gruvbox-dark";
       };
     };
 
-    htop = { enable = true; };
-
-    jq = { enable = true; };
   };
 
   home.file.".ripgreprc".text = ''
