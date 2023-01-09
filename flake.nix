@@ -16,29 +16,34 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = { darwin, home-manager, nur, nixpkgs, nvim, ... }:
-    let
-      system = "aarch64-darwin";
-      homeManagerConfFor = config: { ... }: {
-        nixpkgs.overlays = [ nur.overlay ];
-        imports = [ config ];
-      };
-      darwinSystem = darwin.lib.darwinSystem {
-        system = system;
-        modules = [
-          ./darwin-configuration.nix
-          home-manager.darwinModules.home-manager
-          {
-            home-manager.users.jondion = homeManagerConfFor ./home.nix;
-            home-manager.extraSpecialArgs = { 
-              nvim = nvim.defaultPackage.${system}; 
-            };
-          }
-        ];
-        specialArgs = { inherit nixpkgs; };
-      };
-    in
-    {
-      darwinConfigurations.myMacbook = darwinSystem;
+  outputs = {
+    darwin,
+    home-manager,
+    nur,
+    nixpkgs,
+    nvim,
+    ...
+  }: let
+    system = "aarch64-darwin";
+    homeManagerConfFor = config: {...}: {
+      nixpkgs.overlays = [nur.overlay];
+      imports = [config];
     };
+    darwinSystem = darwin.lib.darwinSystem {
+      system = system;
+      modules = [
+        ./darwin-configuration.nix
+        home-manager.darwinModules.home-manager
+        {
+          home-manager.users.jondion = homeManagerConfFor ./home.nix;
+          home-manager.extraSpecialArgs = {
+            nvim = nvim.defaultPackage.${system};
+          };
+        }
+      ];
+      specialArgs = {inherit nixpkgs;};
+    };
+  in {
+    darwinConfigurations.myMacbook = darwinSystem;
+  };
 }

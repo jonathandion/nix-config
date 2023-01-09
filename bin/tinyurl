@@ -1,5 +1,4 @@
-#!/usr/bin/env nix-shell
-#!nix-shell -i bash -p wget
+#!/usr/bin/env bash
 
 if [ -t 0 ]; then
   if [ -z "$1" ]; then

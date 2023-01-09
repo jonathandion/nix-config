@@ -1,10 +1,14 @@
-{ pkgs, nix, nixpkgs, config, lib, ... }:
-
 {
-  environment.systemPackages = with pkgs;
-    [
-      home-manager
-    ];
+  pkgs,
+  nix,
+  nixpkgs,
+  config,
+  lib,
+  ...
+}: {
+  environment.systemPackages = with pkgs; [
+    home-manager
+  ];
 
   fonts = {
     fontDir.enable = true;

@@ -3,7 +3,6 @@ default: help
 HOST=$(shell hostname | sed s/.local//g)
 
 help: 
-	@echo "Rollbacking config..."
 	./result/sw/bin/darwin-rebuild --help
 
 build: 
@@ -17,6 +16,19 @@ switch:
 update:
 	@echo "Updating..."
 	nix flake update
+
+lint-nix: 
+	@echo "Linting nix files..."
+	alejandra .
+
+lint-bash:
+	@echo "Linting bash files..."
+	shellcheck ./bin/*
+
+lint:
+	@echo "Linting..."
+	make lint-nix
+	make lint-bash
 
 clean:
 	@echo "Cleaning..."

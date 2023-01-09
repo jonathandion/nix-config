@@ -1,9 +1,14 @@
-{ config, lib, pkgs, nvim, system, ... }:
-
 {
-  imports = (import ./programs);
+  config,
+  lib,
+  pkgs,
+  nvim,
+  system,
+  ...
+}: {
+  imports = import ./programs;
 
-  nixpkgs.overlays = [ ];
+  nixpkgs.overlays = [];
 
   home = {
     stateVersion = "22.11";
@@ -29,6 +34,7 @@
       ranger
       ripgrep
       tldr
+      nodejs
       tree
       wget
       pstree
@@ -36,12 +42,11 @@
   };
 
   programs = {
+    home-manager = {enable = true;};
 
-    home-manager = { enable = true; };
+    htop = {enable = true;};
 
-    htop = { enable = true; };
-
-    jq = { enable = true; };
+    jq = {enable = true;};
 
     broot = {
       enable = true;
@@ -146,7 +151,6 @@
         theme = "gruvbox-dark";
       };
     };
-
   };
 
   home.file.".ripgreprc".text = ''

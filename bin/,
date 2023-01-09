@@ -6,7 +6,7 @@ if [[ -z $1 ]]; then
   exit 1
 fi
 
-args="$@"
+args="$*"
 
 for i in $args; do
   v="${v} nixpkgs#$i"
