@@ -48,6 +48,8 @@
 
     jq = {enable = true;};
 
+    kitty = {enable = true;};
+
     broot = {
       enable = true;
     };
@@ -171,6 +173,11 @@
 
   xdg.configFile."nvim" = {
     source = nvim;
+    recursive = true;
+  };
+
+  xdg.configFile."kitty" = {
+    source = programs/kitty;
     recursive = true;
   };
 
