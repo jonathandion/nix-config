@@ -27,7 +27,9 @@
       asciinema
       awscli2
       coreutils
+      moreutils
       renameutils
+      gnupg
       fd
       fx
       neovim
@@ -38,6 +40,8 @@
       tree
       wget
       pstree
+      httpie
+      devbox
     ];
   };
 
@@ -63,16 +67,19 @@
       enable = true;
       enableCompletion = true;
       enableAutosuggestions = true;
-      enableSyntaxHighlighting = true;
+      syntaxHighlighting.enable = true;
       initExtraFirst = ''
         # Fig pre block. Keep at the top of this file.
         [[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
       '';
       initExtra = ''
+
         bindkey ^E edit-command-line
 
         # Fig post block. Keep at the bottom of this file.
         [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
+
+        export PATH=$HOME/.npm-packages/bin:$PATH
       '';
       shellAliases = {
         ".f" = "cd $HOME/code/nix-config";
@@ -81,7 +88,7 @@
         dc = "cd $HOME/documents";
         dl = "cd $HOME/downloads";
         dt = "cd $HOME/desktop";
-        fm = "broot";
+        fm = "vim +Explore";
         ipinfo = "curl ipinfo.io";
         j = "z";
         l = "ls -lFh";
