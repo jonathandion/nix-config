@@ -37,12 +37,14 @@
   homebrew = {
     enable = true;
     casks = [
+      "arc"
       "brave-browser"
       "google-chrome"
       "hammerspoon"
       "insomnia"
       "raycast"
       "stats"
+      "zed"
       "zwift"
     ];
   };

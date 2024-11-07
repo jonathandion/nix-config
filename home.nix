@@ -28,6 +28,8 @@
       awscli2
       coreutils
       moreutils
+      python
+      nvim
       renameutils
       gnupg
       fd
@@ -36,7 +38,6 @@
       ranger
       ripgrep
       tldr
-      nodejs
       tree
       wget
       pstree
@@ -51,8 +52,6 @@
     htop = {enable = true;};
 
     jq = {enable = true;};
-
-    kitty = {enable = true;};
 
     broot = {
       enable = true;
@@ -79,7 +78,13 @@
         # Fig post block. Keep at the bottom of this file.
         [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
 
+        if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+          source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+        fi
+
         export PATH=$HOME/.npm-packages/bin:$PATH
+
+        eval "$(devbox global shellenv --init-hook)"
       '';
       shellAliases = {
         ".f" = "cd $HOME/code/nix-config";
@@ -180,11 +185,6 @@
 
   xdg.configFile."nvim" = {
     source = nvim;
-    recursive = true;
-  };
-
-  xdg.configFile."kitty" = {
-    source = programs/kitty;
     recursive = true;
   };
 
