@@ -11,8 +11,7 @@
   ];
 
   fonts = {
-    fontDir.enable = true;
-    fonts = with pkgs; [
+    packages= with pkgs; [
       hack-font
     ];
   };
@@ -27,7 +26,7 @@
     nixPath = lib.mkForce [
       "nixpkgs=${nixpkgs}"
     ];
-    package = pkgs.nixUnstable;
+    package = pkgs.nixVersions.latest;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
@@ -37,20 +36,15 @@
   homebrew = {
     enable = true;
     casks = [
-      "arc"
-      "brave-browser"
       "google-chrome"
       "hammerspoon"
       "insomnia"
-      "raycast"
       "stats"
-      "zed"
       "zwift"
     ];
   };
 
-  services.nix-daemon.enable = true;
-
+  system.primaryUser = "jondion";
   system.stateVersion = 4;
 
   # macOS specific options
