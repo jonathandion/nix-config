@@ -66,11 +66,9 @@
       enableCompletion = true;
       autosuggestion.enable = true; 
       syntaxHighlighting.enable = true;
-      initExtraFirst = ''
+      initContent = lib.mkBefore ''
         # Fig pre block. Keep at the top of this file.
         [[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
-      '';
-      initExtra = ''
 
         bindkey ^E edit-command-line
 
@@ -88,6 +86,7 @@
       shellAliases = {
         ".f" = "cd $HOME/code/nix-config";
         bulkrename = "qmv -f do";
+        cat = "bat";
         dc = "cd $HOME/documents";
         dl = "cd $HOME/downloads";
         dt = "cd $HOME/desktop";
