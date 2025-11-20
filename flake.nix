@@ -26,7 +26,7 @@
   }: let
     system = "aarch64-darwin";
     homeManagerConfFor = config: {...}: {
-      nixpkgs.overlays = [nur.overlay];
+      nixpkgs.overlays = [nur.overlays.default];
       imports = [config];
     };
     darwinSystem = darwin.lib.darwinSystem {

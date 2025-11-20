@@ -28,7 +28,6 @@
       awscli2
       coreutils
       moreutils
-      python
       nvim
       renameutils
       gnupg
@@ -65,7 +64,7 @@
     zsh = {
       enable = true;
       enableCompletion = true;
-      enableAutosuggestions = true;
+      autosuggestion.enable = true; 
       syntaxHighlighting.enable = true;
       initExtraFirst = ''
         # Fig pre block. Keep at the top of this file.
@@ -89,7 +88,6 @@
       shellAliases = {
         ".f" = "cd $HOME/code/nix-config";
         bulkrename = "qmv -f do";
-        cat = "bat";
         dc = "cd $HOME/documents";
         dl = "cd $HOME/downloads";
         dt = "cd $HOME/desktop";
@@ -98,6 +96,7 @@
         j = "z";
         l = "ls -lFh";
         lS = "ls -1FSsh";
+        sdb = "/Users/jondion/tizen-studio/tools/sdb";
         la = "ls -lAFh";
         ldot = "ls -ld .*";
         ll = "ls -l";
@@ -125,9 +124,11 @@
 
     git = {
       enable = true;
-      userName = "jonathandion";
-      userEmail = "jonathandionalary@gmail.com";
-      extraConfig = {
+      settings = {
+        user = {
+          name = "jonathandion";
+          email = "jonathandionalary@gmail.com";
+        };
         pull = {
           rebase = true;
         };
